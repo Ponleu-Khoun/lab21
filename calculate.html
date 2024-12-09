@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 20px; }
+        input, button { margin: 10px 0; }
+        button { margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <label for="num1">Enter first number:</label>
+    <input type="number" id="num1" required>
+    <br>
+    <label for="num2">Enter second number:</label>
+    <input type="number" id="num2" required>
+    <br>
+    <button onclick="calculate('add')">(+)</button>
+    <button onclick="calculate('subtract')">(-)</button>
+    <button onclick="calculate('multiply')">(×)</button>
+    <button onclick="calculate('divide')">(÷)</button>
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            
+            // Input validation
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('result').innerText = 'Enter plz';
+                return;
+            }
+
+            let result;
+            switch(operation) {
+                case 'add':
+                    result = `Addition: ${num1 + num2}`;
+                    break;
+                case 'subtract':
+                    result = `Subtraction: ${num1 - num2}`;
+                    break;
+                case 'multiply':
+                    result = `Multiplication: ${num1 * num2}`;
+                    break;
+                case 'divide':
+                    result = num2 !== 0 
+                        ? `Division: ${num1 / num2}` 
+                        : 'Cannot divide by zero';
+                    break;
+                default:
+                    result = 'Again';
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
